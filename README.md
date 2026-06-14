@@ -1,6 +1,6 @@
 # Ragent
 
-面向中文场景的 **RAG 问答服务**：FastAPI 提供 HTTP / SSE 接口，内置混合检索、Cross-Encoder 重排、SQLite 对话记忆、审计回放，并集成 **MCP（Model Context Protocol）** 工具编排。
+参考 LangGraph 构建的企业级知识助手。当前已支持 RAG 检索问答、意图识别 与 多工作流路由；下一阶段将演进为 Multi-Agent 协作架构，支撑工具调用与复杂任务编排。
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
