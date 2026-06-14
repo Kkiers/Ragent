@@ -1,0 +1,31 @@
+# Service.Fullscreen.exitFullscreen
+
+# Service.Fullscreen.exitFullscreen
+使小应用退出全屏状态，该方法为异步调用。
+
+## 可用性说明
+
+权限要求 | 视图可用说明 | 平台可用 | 场景
+--- | --- | --- | ---
+可读 | 全屏视图 | PC | \-
+
+## 输入
+
+无需传入参数。
+
+## 输出
+
+无
+
+## 示例代码
+
+### 调用示例
+
+```js
+const DocMiniApp = new BlockitClient().initAPI();
+DocMiniApp.Service.Fullscreen.exitFullscreen();
+```
+
+### 返回示例
+
+无

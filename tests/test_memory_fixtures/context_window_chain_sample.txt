@@ -1,0 +1,12 @@
+# 走主链路；含「你好」易进闲聊分支（会带 context_window 调试字段）
+# 单独一行 --- 表示结束当前 session，下一轮用新 session（新 TXT 文件名）
+
+你好，什么是 Agentic Workflow？
+你好，Andrew Ng（吴恩达）对它有哪些定义？
+你好，这种模式和传统的 Chain 模式有什么区别？
+你好，在 LangGraph 里怎么实现这种 Workflow？
+你好，能不能给一个 Python 代码示例？
+你好，如果我需要在这个代码里加上持久化存储呢？
+
+---
+你好，回顾一下我们刚才讨论的，从定义到代码实现，Agentic Workflow 的核心优势究竟是什么？

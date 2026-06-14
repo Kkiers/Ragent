@@ -1,0 +1,30 @@
+fastapi
+uvicorn[standard]
+aiosqlite
+pydantic
+pydantic-settings
+
+# PDF ingestion (pick one; pdfplumber preferred)
+pdfplumber
+pymupdf
+
+# Vector DB / embeddings pipeline
+chromadb
+langchain-core
+langchain-community
+langchain-classic
+langchain-deepseek
+langchain-ollama
+rank_bm25
+jieba
+
+# Cross-Encoder rerank (bge-reranker-base)
+sentence-transformers
+
+# Load .env into environment variables
+python-dotenv
+requests
+
+# Model Context Protocol (官方 Python 客户端：stdio / 会话 / list_tools / call_tool)
+mcp>=1.2.0
+

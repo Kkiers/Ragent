@@ -1,0 +1,28 @@
+# Environment & secrets
+.env
+**/.env
+*.env
+.env.*
+app/infra/llm/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Runtime data
+data/*.db
+
+# Generated vector store (re-ingest via scripts)
+knowledge/chroma/
+

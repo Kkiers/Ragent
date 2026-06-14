@@ -1,0 +1,420 @@
+# APP下单
+
+# APP下单
+
+路径：产品文档/支付产品/APP支付/API列表/APP下单
+
+用户在商户APP端选择微信支付后，商户需调用该接口在微信支付下单，生成用于[调起支付](https://pay.weixin.qq.com/doc/v3/merchant/4013070351)的预支付交易会话标识(prepay_id)。
+
+## 接口说明
+
+支持商户：【普通商户】
+
+请求方式：【POST】/v3/pay/transactions/app
+
+请求域名：【主域名】https://api.mch.weixin.qq.com 使用该域名将访问就近的接入点
+
+　　　　　【备域名】https://api2.mch.weixin.qq.com 使用该域名将访问异地的接入点 ，指引[点击查看](https://pay.weixin.qq.com/doc/v3/merchant/4012075113)
+
+## 请求参数
+    
+    折叠全部参数
+
+Header   HTTP头参数
+
+ Authorization 　必填　string
+
+请参考[签名认证](https://pay.weixin.qq.com/doc/v3/merchant/4012365342#1.1-%E8%AF%B7%E6%B1%82%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3)生成认证信息
+
+ Accept 　必填　string
+
+请设置为`application/json`
+
+ Content-Type 　必填　string
+
+请设置为`application/json`
+
+body  包体参数
+
+ appid 　必填   string(32)
+
+【商户应用ID】APPID是商户移动应用唯一标识，在[开放平台](https://open.weixin.qq.com/)(移动应用)申请。此处需填写与mchid完成绑定的appid，详见：[商户模式开发必要参数说明](https://pay.weixin.qq.com/doc/v3/merchant/4013070756)。
+
+ mchid 　必填   string(32)
+
+【商户号】是由微信支付系统生成并分配给每个商户的唯一标识符，商户号获取方式请参考[商户模式开发必要参数说明](https://pay.weixin.qq.com/doc/v3/merchant/4013070756)。
+
+ description 　必填   string(127)
+
+【商品描述】商品信息描述，用户微信账单的商品字段中可见(可参考[APP支付示例说明](https://pay.weixin.qq.com/doc/v3/merchant/4013070158#2%E3%80%81APP%E6%94%AF%E4%BB%98%E7%A4%BA%E4%BE%8B%E8%AF%B4%E6%98%8E)-账单示意图)，商户需传递能真实代表商品信息的描述，不能超过127个字符。
+
+ out_trade_no 　必填   string(32)
+
+【商户订单号】商户系统内部订单号，要求6-32个字符内，只能是数字、大小写字母_-|* 且在同一个商户号下唯一。
+
+ time_expire 　选填   string(64)
+
+【支付结束时间】
+
+1、定义：支付结束时间是指用户能够完成该笔订单支付的最后时限，并非订单关闭的时间。超过此时间后，用户将无法对该笔订单进行支付。如商户需在超时后关闭订单，请调用[关闭订单API](https://pay.weixin.qq.com/doc/v3/merchant/4013070360)接口。
+
+2、格式要求：支付结束时间需遵循[rfc3339](https://datatracker.ietf.org/doc/html/rfc3339)标准格式：`yyyy-MM-DDTHH:mm:ss+TIMEZONE`。`yyyy-MM-DD` 表示年月日；`T` 字符用于分隔日期和时间部分；`HH:mm:ss` 表示具体的时分秒；`TIMEZONE` 表示时区（例如，`+08:00` 对应东八区时间，即北京时间。
+
+示例：`2015-05-20T13:29:35+08:00` 表示北京时间2015年5月20日13点29分35秒。
+
+3、若未指定支付结束时间，系统默认以下单时间为起始点计算时效；超过 7 天未支付的订单，无法再支付。
+
+4、注意事项：
+
+- 若当前实际时间已超过订单设置的支付结束时间（time_expire），建议先使用关单接口关闭订单，再使用新的商户订单号重新下单，生成全新订单供用户支付。
+- 支付结束时间不能早于下单时间后1分钟，若设置的支付结束时间早于该时间，系统将自动调整为下单时间后1分钟作为支付结束时间。
+- 传递的支付结束时间需在下单时间的15天以内，如超过15天，微信支付会自动将该时间调整为下单时间后的第15天。
+
+ attach 　选填   string(128)
+
+【商户数据包】商户在创建订单时可传入自定义数据包，该数据对用户不可见，用于存储订单相关的商户自定义信息，其总长度限制在128字符以内。支付成功后[查询订单API](https://pay.weixin.qq.com/doc/v3/merchant/4013070356)和[支付成功回调通知](https://pay.weixin.qq.com/doc/v3/merchant/4013070368)均会将此字段返回给商户，并且该字段还会体现在交易账单。
+
+ notify_url 　必填   string(255)
+
+【商户回调地址】商户接收[支付成功回调通知](https://pay.weixin.qq.com/doc/v3/merchant/4013070368)的地址，需按照[notify_url填写注意事项](https://pay.weixin.qq.com/doc/v3/merchant/4012075420)规范填写。
+
+ goods_tag 　选填   string(32)
+
+【订单优惠标记】[代金券](https://pay.weixin.qq.com/doc/v3/merchant/4012084079)在创建时可以配置多个订单优惠标记，标记的内容由创券商户自定义设置。详细参考：[创建代金券批次API](https://pay.weixin.qq.com/doc/v3/merchant/4012534633)。如果代金券有配置订单优惠标记，则必须在该参数传任意一个配置的订单优惠标记才能使用券。如果代金券没有配置订单优惠标记，则可以不传该参数。
+
+示例：
+如有两个活动，活动A设置了两个优惠标记：WXG1、WXG2；活动B设置了两个优惠标记：WXG1、WXG3；
+下单时优惠标记传WXG2，则订单参与活动A的优惠；
+下单时优惠标记传WXG3，则订单参与活动B的优惠；
+下单时优惠标记传共同的WXG1，则订单参与活动A、B两个活动的优惠；
+
+ support_fapiao 　选填   boolean
+
+【电子发票入口开放标识】 传入true时，支付成功消息和支付详情页将出现开票入口。需要在微信支付商户平台或微信公众平台开通电子发票功能，传此字段才可生效。 详细参考：[电子发票介绍](https://pay.weixin.qq.com/doc/v3/merchant/4012064743)
+true：是
+false：否
+
+ amount 　必填   object
+
+【订单金额】订单金额信息
+
+| ![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg) | 属性 |
+| --- | --- |
+|  | total 　必填   integer【总金额】 订单总金额，单位为分，整型，必须大于0。示例：1元应填写 100 currency 　选填   string(16)【货币类型】符合ISO 4217标准的三位字母代码，固定传：CNY，代表人民币。 |
+
+ detail 　选填   object
+
+【商品详情】 商品详情描述，该结构去除多余空格换行压缩后，总长度不能超过6144字节。
+
+| ![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg) | 属性 |  |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+|  | cost_price 　选填   integer【订单原价】 1、商户侧一张小票订单可能被分多次支付，订单原价用于记录整张小票的交易金额。2、当订单原价与支付金额不相等，则不享受优惠。3、该字段主要用于防止同一张小票分多次支付，以享受多次优惠的情况，正常支付订单不必上传此参数。 invoice_id 　选填   string(32)【商品小票ID】 商家小票ID goods_detail 　 选填   array【单品列表】 订单商品明细列表，至少传入1条![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg)属性 merchant_goods_id 　必填   string(32)【商户侧商品编码】 由半角的大小写字母、数字、中划线、下划线中的一种或几种组成。 wechatpay_goods_id 　选填   string(32)【微信支付商品编码】 微信支付定义的统一商品编码（没有可不传） goods_name 　选填   string(256)【商品名称】 商品的实际名称 quantity 　必填   integer【商品数量】 用户购买的数量 unit_price 　必填   integer【商品单价】整型，单位为：分。如果商户有优惠，需传输商户优惠后的单价(例如：用户对一笔100元的订单使用了商场发的纸质优惠券100-50，则活动商品的单价应为原单价-50) | ![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg) | 属性 |  | merchant_goods_id 　必填   string(32)【商户侧商品编码】 由半角的大小写字母、数字、中划线、下划线中的一种或几种组成。 wechatpay_goods_id 　选填   string(32)【微信支付商品编码】 微信支付定义的统一商品编码（没有可不传） goods_name 　选填   string(256)【商品名称】 商品的实际名称 quantity 　必填   integer【商品数量】 用户购买的数量 unit_price 　必填   integer【商品单价】整型，单位为：分。如果商户有优惠，需传输商户优惠后的单价(例如：用户对一笔100元的订单使用了商场发的纸质优惠券100-50，则活动商品的单价应为原单价-50) |
+| ![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg) | 属性 |  |  |  |  |
+|  | merchant_goods_id 　必填   string(32)【商户侧商品编码】 由半角的大小写字母、数字、中划线、下划线中的一种或几种组成。 wechatpay_goods_id 　选填   string(32)【微信支付商品编码】 微信支付定义的统一商品编码（没有可不传） goods_name 　选填   string(256)【商品名称】 商品的实际名称 quantity 　必填   integer【商品数量】 用户购买的数量 unit_price 　必填   integer【商品单价】整型，单位为：分。如果商户有优惠，需传输商户优惠后的单价(例如：用户对一笔100元的订单使用了商场发的纸质优惠券100-50，则活动商品的单价应为原单价-50) |  |  |  |  |
+
+ scene_info 　选填   object
+
+【场景信息】 场景信息
+
+| ![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg) | 属性 |  |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+|  | payer_client_ip 　必填   string(45)【用户终端IP】 用户的客户端IP，支持IPv4和IPv6两种格式的IP地址。 device_id 　选填   string(32)【商户端设备号】 商户端设备号（门店号或收银设备ID）。 store_info 　选填   object【商户门店信息】 商户门店信息![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg)属性 id 　必填    string(32)【门店编号】商户侧门店编号，总长度不超过32字符，由商户自定义。 name 　选填   string(256)【门店名称】 商户侧门店名称，由商户自定义。 area_code 　选填   string(32)【地区编码】 地区编码，详细请见[省市区编号对照表](https://pay.weixin.qq.com/doc/v3/merchant/4012076371)。 address 　选填   string(512)【详细地址】 详细的商户门店地址，由商户自定义。 | ![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg) | 属性 |  | id 　必填    string(32)【门店编号】商户侧门店编号，总长度不超过32字符，由商户自定义。 name 　选填   string(256)【门店名称】 商户侧门店名称，由商户自定义。 area_code 　选填   string(32)【地区编码】 地区编码，详细请见[省市区编号对照表](https://pay.weixin.qq.com/doc/v3/merchant/4012076371)。 address 　选填   string(512)【详细地址】 详细的商户门店地址，由商户自定义。 |
+| ![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg) | 属性 |  |  |  |  |
+|  | id 　必填    string(32)【门店编号】商户侧门店编号，总长度不超过32字符，由商户自定义。 name 　选填   string(256)【门店名称】 商户侧门店名称，由商户自定义。 area_code 　选填   string(32)【地区编码】 地区编码，详细请见[省市区编号对照表](https://pay.weixin.qq.com/doc/v3/merchant/4012076371)。 address 　选填   string(512)【详细地址】 详细的商户门店地址，由商户自定义。 |  |  |  |  |
+
+settle_info 　选填   object
+
+【结算信息】 结算信息
+
+| ![](https://gtimg.wechatpay.cn/resource/xres/img/202409/2a1a0741836e71dcb14320f2fcac3a6e_32x32.svg) | 属性 |
+| --- | --- |
+|  | profit_sharing 　选填   boolean【分账标识】订单的分账标识在下单时设置，传入`true`表示在订单支付成功后可进行分账操作。以下是详细说明：需要分账（传入`true`）：订单收款成功后，资金将被冻结并转入基本账户的不可用余额。商户可通过[请求分账API](https://pay.weixin.qq.com/doc/v3/merchant/4012524936)，将收款资金分配给其他商户或用户。完成分账操作后，可通过接口[解冻剩余资金](https://pay.weixin.qq.com/doc/v3/merchant/4012526374)，或在支付成功30天后自动解冻。不需要分账（传入`false`或不传，默认为`false`）：订单收款成功后，资金不会被冻结，而是直接转入基本账户的可用余额。 |
+
+请求示例
+curlJavaGo
+POST
+![](https://gtimg.wechatpay.cn/resource/xres/img/202409/5236a3a065efe1276d29855d7cad26f8_16x16.svg)
+```
+1curl -X POST \
+2  https://api.mch.weixin.qq.com/v3/pay/transactions/app \
+3  -H "Authorization: WECHATPAY2-SHA256-RSA2048 mchid=\"1900000001\",..." \
+4  -H "Accept: application/json" \
+5  -H "Content-Type: application/json" \
+6  -d '{
+7    "appid" : "wxd678efh567hg6787",
+8    "mchid" : "1230000109",
+9    "description" : "Image形象店-深圳腾大-QQ公仔",
+10    "out_trade_no" : "1217752501201407033233368018",
+11    "time_expire" : "2018-06-08T10:34:56+08:00",
+12    "attach" : "自定义数据说明",
+13    "notify_url" : " https://www.weixin.qq.com/wxpay/pay.php",
+14    "goods_tag" : "WXG",
+15    "support_fapiao" : false,
+16    "amount" : {
+17      "total" : 100,
+18      "currency" : "CNY"
+19    },
+20    "detail" : {
+21      "cost_price" : 608800,
+22      "invoice_id" : "微信123",
+23      "goods_detail" : [
+24        {
+25          "merchant_goods_id" : "1246464644",
+26          "wechatpay_goods_id" : "1001",
+27          "goods_name" : "iPhoneX 256G",
+28          "quantity" : 1,
+29          "unit_price" : 528800
+30        }
+31      ]
+32    },
+33    "scene_info" : {
+34      "payer_client_ip" : "14.23.150.211",
+35      "device_id" : "013467007045764",
+36      "store_info" : {
+37        "id" : "0001",
+38        "name" : "腾讯大厦分店",
+39        "area_code" : "440305",
+40        "address" : "广东省深圳市南山区科技中一道10000号"
+41      }
+42    },
+43    "settle_info" : {
+44      "profit_sharing" : false
+45    }
+46  }'
+47
+```
+
+需配合微信支付工具库 WXPayUtility 使用，请参考[Java](https://pay.weixin.qq.com/doc/v3/merchant/4014931831)
+![](https://gtimg.wechatpay.cn/resource/xres/img/202409/5236a3a065efe1276d29855d7cad26f8_16x16.svg)
+```
+1package com.java.demo;
+2
+3import com.java.utils.WXPayUtility; // 引用微信支付工具库，参考：https://pay.weixin.qq.com/doc/v3/merchant/4014931831
+4
+5import com.google.gson.annotations.SerializedName;
+6import com.google.gson.annotations.Expose;
+7import okhttp3.MediaType;
+8import okhttp3.OkHttpClient;
+9import okhttp3.Request;
+10import okhttp3.RequestBody;
+11import okhttp3.Response;
+12
+13import java.io.IOException;
+14import java.io.UncheckedIOException;
+15import java.security.PrivateKey;
+16import java.security.PublicKey;
+17import java.util.ArrayList;
+18import java.util.HashMap;
+19import java.util.List;
+20import java.util.Map;
+21
+22/**
+23 * App下单
+24 */
+25public class AppPrepay {
+26  private static String HOST = "https://api.mch.weixin.qq.com";
+27  private static String METHOD = "POST";
+28  private static String PATH = "/v3/pay/transactions/app";
+29
+30  public static void main(String[] args) {
+31    // TODO: 请准备商户开发必要参数，参考：https://pay.weixin.qq.com/doc/v3/merchant/4013070756
+32    AppPrepay client = new AppPrepay(
+33      "19xxxxxxxx",                    // 商户号，是由微信支付系统生成并分配给每个商户的唯一标识符，商户号获取方式参考 https://pay.weixin.qq.com/doc/v3/merchant/4013070756
+34      "1DDE55AD98Exxxxxxxxxx",         // 商户API证书序列号，如何获取请参考 https://pay.weixin.qq.com/doc/v3/merchant/4013053053
+35      "/path/to/apiclient_key.pem",     // 商户API证书私钥文件路径，本地文件路径
+36      "PUB_KEY_ID_xxxxxxxxxxxxx",      // 微信支付公钥ID，如何获取请参考 https://pay.weixin.qq.com/doc/v3/merchant/4013038816
+37      "/path/to/wxp_pub.pem"           // 微信支付公钥文件路径，本地文件路径
+38    );
+39
+40    CommonPrepayRequest request = new CommonPrepayRequest();
+41    request.appid = "wxd678efh567hg6787";
+42    request.mchid = "1230000109";
+43    request.description = "Image形象店-深圳腾大-QQ公仔";
+44    request.outTradeNo = "1217752501201407033233368018";
+45    request.timeExpire = "2018-06-08T10:34:56+08:00";
+46    request.attach = "自定义数据说明";
+47    request.notifyUrl = " https://www.weixin.qq.com/wxpay/pay.php";
+48    request.goodsTag = "WXG";
+49    request.supportFapiao = false;
+50    request.amount = new CommonAmountInfo();
+51    request.amount.total = 100L;
+52    request.amount.currency = "CNY";
+53    request.detail = new CouponInfo();
+54    request.detail.costPrice = 608800L;
+55    request.detail.invoiceId = "微信123";
+56    request.detail.goodsDetail = new ArrayList<>();
+57    {
+58      GoodsDetail goodsDetailItem = new GoodsDetail();
+59      goodsDetailItem.merchantGoodsId = "1246464644";
+60      goodsDetailItem.wechatpayGoodsId = "1001";
+61      goodsDetailItem.goodsName = "iPhoneX 256G";
+62      goodsDetailItem.quantity = 1L;
+63      goodsDetailItem.unitPrice = 528800L;
+64      request.detail.goodsDetail.add(goodsDetailItem);
+65    };
+66    request.sceneInfo = new CommonSceneInfo();
+67    request.sceneInfo.payerClientIp = "14.23.150.211";
+68    request.sceneInfo.deviceId = "013467007045764";
+69    request.sceneInfo.storeInfo = new StoreInfo();
+70    request.sceneInfo.storeInfo.id = "0001";
+71    request.sceneInfo.storeInfo.name = "腾讯大厦分店";
+72    request.sceneInfo.storeInfo.areaCode = "440305";
+73    request.sceneInfo.storeInfo.address = "广东省深圳市南山区科技中一道10000号";
+74    request.settleInfo = new SettleInfo();
+75    request.settleInfo.profitSharing = false;
+76    try {
+77      DirectAPIv3AppPrepayResponse response = client.run(request);
+78        // TODO: 请求成功，继续业务逻辑
+79        System.out.println(response);
+80    } catch (WXPayUtility.ApiException e) {
+81        // TODO: 请求失败，根据状态码执行不同的逻辑
+82        e.printStackTrace();
+83    }
+84  }
+85
+86  public DirectAPIv3AppPrepayResponse run(CommonPrepayRequest request) {
+87    String uri = PATH;
+88    String reqBody = WXPayUtility.toJson(request);
+89
+90    Request.Builder reqBuilder = new Request.Builder().url(HOST + uri);
+91    reqBuilder.addHeader("Accept", "application/json");
+92    reqBuilder.addHeader("Wechatpay-Serial", wechatPayPublicKeyId);
+93    reqBuilder.addHeader("Authorization", WXPayUtility.buildAuthorization(mchid, certificateSerialNo,privateKey, METHOD, uri, reqBody));
+94    reqBuilder.addHeader("Content-Type", "application/json");
+95    RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), reqBody);
+96    reqBuilder.method(METHOD, requestBody);
+97    Request httpRequest = reqBuilder.build();
+98
+99    // 发送HTTP请求
+100    OkHttpClient client = new OkHttpClient.Builder().build();
+101    try (Response httpResponse = client.newCall(httpRequest).execute()) {
+102      String respBody = WXPayUtility.extractBody(httpResponse);
+103      if (httpResponse.code() >= 200 && httpResponse.code() = 200 && httpResponse.StatusCode < 300 {
+116		// 2XX 成功，验证应答签名
+117		err = wxpay_utility.ValidateResponse(
+118			config.WechatPayPublicKeyId(),
+119			config.WechatPayPublicKey(),
+120			&httpResponse.Header,
+121			respBody,
+122		)
+123		if err != nil {
+124			return nil, err
+125		}
+126		response := &DirectApiv3AppPrepayResponse{}
+127		if err := json.Unmarshal(respBody, response); err != nil {
+128			return nil, err
+129		}
+130
+131		return response, nil
+132	} else {
+133		return nil, wxpay_utility.NewApiException(
+134			httpResponse.StatusCode,
+135			httpResponse.Header,
+136			respBody,
+137		)
+138	}
+139}
+140
+141type CommonPrepayRequest struct {
+142	Appid         *string           `json:"appid,omitempty"`
+143	Mchid         *string           `json:"mchid,omitempty"`
+144	Description   *string           `json:"description,omitempty"`
+145	OutTradeNo    *string           `json:"out_trade_no,omitempty"`
+146	TimeExpire    *time.Time        `json:"time_expire,omitempty"`
+147	Attach        *string           `json:"attach,omitempty"`
+148	NotifyUrl     *string           `json:"notify_url,omitempty"`
+149	GoodsTag      *string           `json:"goods_tag,omitempty"`
+150	SupportFapiao *bool             `json:"support_fapiao,omitempty"`
+151	Amount        *CommonAmountInfo `json:"amount,omitempty"`
+152	Detail        *CouponInfo       `json:"detail,omitempty"`
+153	SceneInfo     *CommonSceneInfo  `json:"scene_info,omitempty"`
+154	SettleInfo    *SettleInfo       `json:"settle_info,omitempty"`
+155}
+156
+157type DirectApiv3AppPrepayResponse struct {
+158	PrepayId *string `json:"prepay_id,omitempty"`
+159}
+160
+161type CommonAmountInfo struct {
+162	Total    *int64  `json:"total,omitempty"`
+163	Currency *string `json:"currency,omitempty"`
+164}
+165
+166type CouponInfo struct {
+167	CostPrice   *int64        `json:"cost_price,omitempty"`
+168	InvoiceId   *string       `json:"invoice_id,omitempty"`
+169	GoodsDetail []GoodsDetail `json:"goods_detail,omitempty"`
+170}
+171
+172type CommonSceneInfo struct {
+173	PayerClientIp *string    `json:"payer_client_ip,omitempty"`
+174	DeviceId      *string    `json:"device_id,omitempty"`
+175	StoreInfo     *StoreInfo `json:"store_info,omitempty"`
+176}
+177
+178type SettleInfo struct {
+179	ProfitSharing *bool `json:"profit_sharing,omitempty"`
+180}
+181
+182type GoodsDetail struct {
+183	MerchantGoodsId  *string `json:"merchant_goods_id,omitempty"`
+184	WechatpayGoodsId *string `json:"wechatpay_goods_id,omitempty"`
+185	GoodsName        *string `json:"goods_name,omitempty"`
+186	Quantity         *int64  `json:"quantity,omitempty"`
+187	UnitPrice        *int64  `json:"unit_price,omitempty"`
+188}
+189
+190type StoreInfo struct {
+191	Id       *string `json:"id,omitempty"`
+192	Name     *string `json:"name,omitempty"`
+193	AreaCode *string `json:"area_code,omitempty"`
+194	Address  *string `json:"address,omitempty"`
+195}
+196
+```
+
+## 应答参数
+
+| 200 OK |  | 200 OK |
+| --- | --- | --- |
+|  | 200 OK |  |
+
+ prepay_id 　必填   string(64)
+
+【预支付交易会话标识】预支付交易会话标识，[APP调起支付](https://pay.weixin.qq.com/doc/v3/merchant/4013070351)时需要使用的参数，有效期为2小时，失效后需要重新请求该接口以获取新的prepay_id。
+
+应答示例
+
+200 OK
+![](https://gtimg.wechatpay.cn/resource/xres/img/202409/5236a3a065efe1276d29855d7cad26f8_16x16.svg)
+```
+1{
+2  "prepay_id" : "wx201410272009395522657a690389285100"
+3}
+4
+```
+ 
+## 错误码
+
+### 公共错误码
+
+| 状态码 | 错误码 | 描述 | 解决方案 |
+| --- | --- | --- | --- |
+| 400 | PARAM_ERROR | 参数错误 | 请根据错误提示正确传入参数 |
+| 400 | INVALID_REQUEST | HTTP 请求不符合微信支付 APIv3 接口规则 | 请参阅 [接口规则](https://pay.weixin.qq.com/doc/v3/merchant/4012081709)检查传入的参数 |
+| 401 | SIGN_ERROR | 验证不通过 | 请参阅 [签名常见问题](https://pay.weixin.qq.com/doc/v3/merchant/4012365347)排查 |
+| 500 | SYSTEM_ERROR | 系统异常，请稍后重试 | 请稍后重试 |
+
+### 业务错误码
+
+| 状态码 | 错误码 | 描述 | 解决方案 |
+| --- | --- | --- | --- |
+| 400 | APPID_MCHID_NOT_MATCH | AppID和mch_id不匹配 | 请确认AppID和mch_id是否匹配，查询指引参考：[查询商户号绑定的APPID](https://pay.weixin.qq.com/doc/v3/merchant/4013289251) |
+| 400 | INVALID_REQUEST | 无效请求 | 请根据接口返回的详细信息检查 |
+| 400 | MCH_NOT_EXISTS | 商户号不存在 | 请检查商户号是否正确，商户号获取方式请参考：[普通商户模式开发必要参数说明](https://pay.weixin.qq.com/doc/v3/merchant/4013070756) |
+| 400 | PARAM_ERROR | 参数错误 | 请根据接口返回的错误描述检查参数，参数需按API文档字段填写说明填写 |
+| 401 | SIGN_ERROR | 签名错误 | 请检查签名参数和方法是否都符合签名算法要求，参考：[如何生成签名](https://pay.weixin.qq.com/doc/v3/merchant/4012365342#2.-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E9%AA%8C%E7%AD%BE%EF%BC%9F%E5%A6%82%E4%BD%95%E9%AA%8C%E7%AD%BE%EF%BC%9F) |
+| 403 | NO_AUTH | 商户无权限 | 请商户前往商户平台申请此接口相关权限，参考：[权限申请](https://pay.weixin.qq.com/doc/v3/merchant/4013070174) |
+| 403 | OUT_TRADE_NO_USED | 商户订单号重复 | 请核实商户订单号是否重复提交 |
+| 429 | FREQUENCY_LIMITED | 频率超限 | 请求频率超限，请降低请求接口频率 |
+| 500 | SYSTEM_ERROR | 系统错误 | 系统异常，请用相同参数重新调用 |

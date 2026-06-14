@@ -1,0 +1,19 @@
+{
+  "chroma": {
+    "persist_dir": "knowledge/chroma",
+    "collection": "huawei_voicecall_faq",
+    "faq_chunks_jsonl": "knowledge/HUAWEI-Voicecall-faq.chunks.jsonl"
+  },
+  "retrieval_debug": {
+    "default_query": "为什么我的号码被拦截了？",
+    "top_k": 10,
+    "dump_candidates": true,
+    "candidates_out": "tests/rerank_candidates.txt"
+  },
+  "rerank_debug": {
+    "model": "BAAI/bge-reranker-base",
+    "top_k": 20,
+    "rerank_out": "tests/rerank_results.txt"
+  }
+}
+

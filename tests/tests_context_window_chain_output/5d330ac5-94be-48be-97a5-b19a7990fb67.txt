@@ -1,0 +1,672 @@
+主链路上下文窗口导出
+说明: 本文件仅记录 session_id = 5d330ac5-94be-48be-97a5-b19a7990fb67 的对话；
+其它 session 会写入其它文件名，不会混在本文件。
+
+============================================================================
+UTC 时间: 2026-04-19T09:50:05+00:00
+Session ID（本文件仅含此会话）: 5d330ac5-94be-48be-97a5-b19a7990fb67
+Trace ID: caf7cc3f-8f3c-4a45-a685-79f2453edf19
+轮次: 第 1 轮
+意图: WORKFLOW
+用户输入（本轮 query）:
+你好，什么是 Agentic Workflow？
+助手回复（节选）:
+这个分支先保留骨架，后续接工作流执行器。
+============================================================================
+【上下文窗口 — 与本轮 LLM 调用 assemble 结果一致】
+（本轮 meta 无 context_window：可能走了工具/澄清/工作流等未装配窗口的分支。）
+
+
+============================================================================
+UTC 时间: 2026-04-19T09:50:29+00:00
+Session ID（本文件仅含此会话）: 5d330ac5-94be-48be-97a5-b19a7990fb67
+Trace ID: 5bee9b16-953b-488b-a973-86fb775b3d1e
+轮次: 第 2 轮
+意图: CHAT
+用户输入（本轮 query）:
+你好，Andrew Ng（吴恩达）对它有哪些定义？
+助手回复（节选）:
+Andrew Ng（吴恩达）并没有对“Agentic Workflow”给出一个唯一的、标准的定义，但他通过演讲、课程和文章，清晰地描绘了这一概念的核心思想和发展方向。他的观点可以总结为以下几个关键点：
+
+### 1. **从“单次提示”到“多步工作流”的演进**
+吴恩达认为，当前大多数人对AI的使用还停留在“单次提示”的层面，即用户输入一个问题，AI一次性给出答案。而 **Agentic Workflow（智能体工作流）** 是指让AI智能体（Agent）通过**多步骤、有规划、能使用工具**的方式来完成一个复杂的任务。这更接近人类解决问题的方式：分解任务、逐步执行、根据反馈调整。
+
+### 2. **四大核心设计模式**
+在2024年的演讲和《AI Agentic Workflow Design Patterns》一文中，他重点阐述了构建有效智能体工作流的四种关键模式：
+
+*   **反思（Reflection）：** 智能体不会盲目接受自己第一次的输出。它会**自我审查、批判自己的结果**，检查是否存在错误、不一致或可以改进的地方，然后进行修正。这是提升输出质量的关键。
+*   …
+============================================================================
+【上下文窗口 — 与本轮 LLM 调用 assemble 结果一致】
+
+--- 消息 [0] role=system ---
+你是一个自然、简洁、可靠的聊天助手。
+
+--- 消息 [1] role=user ---
+你好，什么是 Agentic Workflow？
+
+--- 消息 [2] role=assistant ---
+这个分支先保留骨架，后续接工作流执行器。
+
+--- 消息 [3] role=user ---
+你好，Andrew Ng（吴恩达）对它有哪些定义？
+
+--- context_window 其余字段（JSON）---
+{
+  "approx_input_tokens": 63,
+  "user_truncated": false,
+  "current_retrieval_truncated": false,
+  "current_tool_output_truncated": false,
+  "system_truncated": false,
+  "history_summary_used": false,
+  "old_messages_removed": 0,
+  "recent_messages_removed": 0
+}
+
+============================================================================
+UTC 时间: 2026-04-19T09:51:09+00:00
+Session ID（本文件仅含此会话）: 5d330ac5-94be-48be-97a5-b19a7990fb67
+Trace ID: 691e9f70-b7f6-4764-a3c5-f52e634dfb4c
+轮次: 第 3 轮
+意图: CHAT
+用户输入（本轮 query）:
+你好，这种模式和传统的 Chain 模式有什么区别？
+助手回复（节选）:
+这是一个非常核心且重要的问题。Andrew Ng 提出的 **Agentic Workflow** 与传统的 **Chain** 模式（以 LangChain 等框架为代表）在理念和实现上有本质区别，可以看作是 AI 应用架构的演进。
+
+简单来说：**Chain 是预定义的、线性的“流水线”；而 Agentic Workflow 是动态的、具备决策能力的“工作流”。**
+
+下面我们从几个维度进行详细对比：
+
+| 维度 | 传统 Chain 模式 | Agentic Workflow |
+| :--- | :--- | :--- |
+| **核心思想** | **确定性流程**：将任务分解为一系列固定的、预先编排好的步骤（链）。像工厂的装配线。 | **动态决策**：赋予智能体（Agent）自主权，使其能根据目标、上下文和中间结果，动态决定下一步做什么。像一位有经验的经理。 |
+| **控制流** | **线性或有限分支**：执行路径在运行前就已确定。通常是 `A -> B -> C`，可能有一些简单的 `if-else` 条件分支。 | **循环与递归**：核心是 **“感知-思考-行…
+============================================================================
+【上下文窗口 — 与本轮 LLM 调用 assemble 结果一致】
+
+--- 消息 [0] role=system ---
+你是一个自然、简洁、可靠的聊天助手。
+
+--- 消息 [1] role=user ---
+你好，什么是 Agentic Workflow？
+
+--- 消息 [2] role=assistant ---
+这个分支先保留骨架，后续接工作流执行器。
+
+--- 消息 [3] role=user ---
+你好，Andrew Ng（吴恩达）对它有哪些定义？
+
+--- 消息 [4] role=assistant ---
+Andrew Ng（吴恩达）并没有对“Agentic Workflow”给出一个唯一的、标准的定义，但他通过演讲、课程和文章，清晰地描绘了这一概念的核心思想和发展方向。他的观点可以总结为以下几个关键点：
+
+### 1. **从“单次提示”到“多步工作流”的演进**
+吴恩达认为，当前大多数人对AI的使用还停留在“单次提示”的层面，即用户输入一个问题，AI一次性给出答案。而 **Agentic Workflow（智能体工作流）** 是指让AI智能体（Agent）通过**多步骤、有规划、能使用工具**的方式来完成一个复杂的任务。这更接近人类解决问题的方式：分解任务、逐步执行、根据反馈调整。
+
+### 2. **四大核心设计模式**
+在2024年的演讲和《AI Agentic Workflow Design Patterns》一文中，他重点阐述了构建有效智能体工作流的四种关键模式：
+
+*   **反思（Reflection）：** 智能体不会盲目接受自己第一次的输出。它会**自我审查、批判自己的结果**，检查是否存在错误、不一致或可以改进的地方，然后进行修正。这是提升输出质量的关键。
+*   **工具使用（Tool Use）：** 智能体不仅仅是生成文本，它应该能够**调用外部工具和API**，例如执行计算、搜索网络、查询数据库、编写代码等，从而扩展其能力边界。
+*   **规划（Planning）：** 智能体在开始任务前或执行过程中，会**制定并动态调整一个计划或任务列表**。例如，写一篇博客可能需要先列大纲、再研究、然后起草、最后编辑。
+*   **多智能体协作（Multi-agent collaboration）：** 一个复杂任务可以由**多个专门的智能体**共同完成。它们各司其职（如一个负责研究，一个负责写作，一个负责检查），通过相互讨论、辩论和协作来产生更优的结果。
+
+### 3. **核心价值：大幅提升复杂任务的表现**
+吴恩达强调，采用这些工作流模式，能**显著提升大语言模型在复杂、开放式任务上的性能**。他通过实验表明，一个具备反思能力的写作智能体，其输出质量远高于单次提示。他认为，这代表了当前让大语言模型发挥更大价值的最有前景的方向之一。
+
+### 4. **对开发者和企业的启示**
+他鼓励开发者和企业：
+*   **超越聊天界面**，去设计能够自主或半自主执行多步任务的AI应用。
+*   **将AI视为一个可以指挥的“工作者”**，而不仅仅是一个问答机。
+*   投资于构建**可靠、安全、可评估**的智能体系统。
+
+**总结来说，在吴恩达的语境下，Agentic Workflow 的核心定义是：** **一套让AI智能体通过规划、工具使用、反思及多智能体协作等模式，以多步骤、自主或半自主的方式可靠完成复杂任务的设计框架和方法论。** 这被认为是解锁大语言模型更高层次能力和实用价值的关键路径。
+
+--- 消息 [5] role=user ---
+你好，这种模式和传统的 Chain 模式有什么区别？
+
+--- context_window 其余字段（JSON）---
+{
+  "approx_input_tokens": 765,
+  "user_truncated": false,
+  "current_retrieval_truncated": false,
+  "current_tool_output_truncated": false,
+  "system_truncated": false,
+  "history_summary_used": false,
+  "old_messages_removed": 0,
+  "recent_messages_removed": 0
+}
+
+============================================================================
+UTC 时间: 2026-04-19T09:51:09+00:00
+Session ID（本文件仅含此会话）: 5d330ac5-94be-48be-97a5-b19a7990fb67
+Trace ID: e9d67a65-8507-44dd-ac3d-b81670ce4181
+轮次: 第 4 轮
+意图: WORKFLOW
+用户输入（本轮 query）:
+你好，在 LangGraph 里怎么实现这种 Workflow？
+助手回复（节选）:
+这个分支先保留骨架，后续接工作流执行器。
+============================================================================
+【上下文窗口 — 与本轮 LLM 调用 assemble 结果一致】
+（本轮 meta 无 context_window：可能走了工具/澄清/工作流等未装配窗口的分支。）
+
+
+============================================================================
+UTC 时间: 2026-04-19T09:52:11+00:00
+Session ID（本文件仅含此会话）: 5d330ac5-94be-48be-97a5-b19a7990fb67
+Trace ID: 3022aac9-bb67-4fe5-9f4b-f6558d0efd11
+轮次: 第 5 轮
+意图: CHAT
+用户输入（本轮 query）:
+你好，能不能给一个 Python 代码示例？
+助手回复（节选）:
+当然可以。我将用一个经典的 **“研究并撰写报告”** 任务来展示如何在 LangGraph 中实现一个具备 **反思（Reflection）** 和 **规划（Planning）** 能力的 Agentic Workflow。
+
+这个示例将创建一个智能体，它能够：
+1. **规划**：分解研究任务
+2. **执行**：使用工具搜索信息
+3. **反思**：评估收集到的信息是否足够
+4. **协作**：多个角色（研究员、写作者）协作
+
+### 环境准备
+
+首先安装必要的库：
+
+```bash
+pip install langgraph langchain-openai tavily-python
+```
+
+### 完整代码示例
+
+```python
+import os
+from typing import TypedDict, List, Annotated
+from langgraph.graph import StateGraph, END
+from langgraph.graph.message import add_messages
+from langchain_openai …
+============================================================================
+【上下文窗口 — 与本轮 LLM 调用 assemble 结果一致】
+
+--- 消息 [0] role=system ---
+你是一个自然、简洁、可靠的聊天助手。
+
+--- 消息 [1] role=user ---
+你好，什么是 Agentic Workflow？
+
+--- 消息 [2] role=assistant ---
+这个分支先保留骨架，后续接工作流执行器。
+
+--- 消息 [3] role=user ---
+你好，Andrew Ng（吴恩达）对它有哪些定义？
+
+--- 消息 [4] role=assistant ---
+Andrew Ng（吴恩达）并没有对“Agentic Workflow”给出一个唯一的、标准的定义，但他通过演讲、课程和文章，清晰地描绘了这一概念的核心思想和发展方向。他的观点可以总结为以下几个关键点：
+
+### 1. **从“单次提示”到“多步工作流”的演进**
+吴恩达认为，当前大多数人对AI的使用还停留在“单次提示”的层面，即用户输入一个问题，AI一次性给出答案。而 **Agentic Workflow（智能体工作流）** 是指让AI智能体（Agent）通过**多步骤、有规划、能使用工具**的方式来完成一个复杂的任务。这更接近人类解决问题的方式：分解任务、逐步执行、根据反馈调整。
+
+### 2. **四大核心设计模式**
+在2024年的演讲和《AI Agentic Workflow Design Patterns》一文中，他重点阐述了构建有效智能体工作流的四种关键模式：
+
+*   **反思（Reflection）：** 智能体不会盲目接受自己第一次的输出。它会**自我审查、批判自己的结果**，检查是否存在错误、不一致或可以改进的地方，然后进行修正。这是提升输出质量的关键。
+*   **工具使用（Tool Use）：** 智能体不仅仅是生成文本，它应该能够**调用外部工具和API**，例如执行计算、搜索网络、查询数据库、编写代码等，从而扩展其能力边界。
+*   **规划（Planning）：** 智能体在开始任务前或执行过程中，会**制定并动态调整一个计划或任务列表**。例如，写一篇博客可能需要先列大纲、再研究、然后起草、最后编辑。
+*   **多智能体协作（Multi-agent collaboration）：** 一个复杂任务可以由**多个专门的智能体**共同完成。它们各司其职（如一个负责研究，一个负责写作，一个负责检查），通过相互讨论、辩论和协作来产生更优的结果。
+
+### 3. **核心价值：大幅提升复杂任务的表现**
+吴恩达强调，采用这些工作流模式，能**显著提升大语言模型在复杂、开放式任务上的性能**。他通过实验表明，一个具备反思能力的写作智能体，其输出质量远高于单次提示。他认为，这代表了当前让大语言模型发挥更大价值的最有前景的方向之一。
+
+### 4. **对开发者和企业的启示**
+他鼓励开发者和企业：
+*   **超越聊天界面**，去设计能够自主或半自主执行多步任务的AI应用。
+*   **将AI视为一个可以指挥的“工作者”**，而不仅仅是一个问答机。
+*   投资于构建**可靠、安全、可评估**的智能体系统。
+
+**总结来说，在吴恩达的语境下，Agentic Workflow 的核心定义是：** **一套让AI智能体通过规划、工具使用、反思及多智能体协作等模式，以多步骤、自主或半自主的方式可靠完成复杂任务的设计框架和方法论。** 这被认为是解锁大语言模型更高层次能力和实用价值的关键路径。
+
+--- 消息 [5] role=user ---
+你好，这种模式和传统的 Chain 模式有什么区别？
+
+--- 消息 [6] role=assistant ---
+这是一个非常核心且重要的问题。Andrew Ng 提出的 **Agentic Workflow** 与传统的 **Chain** 模式（以 LangChain 等框架为代表）在理念和实现上有本质区别，可以看作是 AI 应用架构的演进。
+
+简单来说：**Chain 是预定义的、线性的“流水线”；而 Agentic Workflow 是动态的、具备决策能力的“工作流”。**
+
+下面我们从几个维度进行详细对比：
+
+| 维度 | 传统 Chain 模式 | Agentic Workflow |
+| :--- | :--- | :--- |
+| **核心思想** | **确定性流程**：将任务分解为一系列固定的、预先编排好的步骤（链）。像工厂的装配线。 | **动态决策**：赋予智能体（Agent）自主权，使其能根据目标、上下文和中间结果，动态决定下一步做什么。像一位有经验的经理。 |
+| **控制流** | **线性或有限分支**：执行路径在运行前就已确定。通常是 `A -> B -> C`，可能有一些简单的 `if-else` 条件分支。 | **循环与递归**：核心是 **“感知-思考-行动”循环**。智能体持续评估现状，决定是调用工具、进行反思、继续执行还是结束任务。路径是运行时生成的。 |
+| **核心驱动力** | **数据流**：关注的是如何将上一个步骤的输出，作为下一个步骤的输入有效地传递下去。 | **目标与推理**：关注的是如何让智能体理解目标、制定计划（Planning）并进行批判性思考（Reflection）以达成目标。 |
+| **灵活性** | **较低**：擅长处理结构清晰、流程固定的任务（如：总结文档 -> 提取实体 -> 查询数据库 -> 生成报告）。如果任务偏离预设流程，容易失败。 | **很高**：擅长处理开放性强、需要探索和调整的复杂任务（如：“研究这个主题并写一份全面的市场分析报告”）。能处理意外和不确定性。 |
+| **典型组件** | 提示模板、LLM、工具（按固定顺序调用）、输出解析器。 | **智能体（具备决策能力的LLM）**、工具集、**规划器**、**反思器**、**多智能体协作**框架。 |
+| **与工具的关系** | **被动调用**：工具是链中的一个固定节点，在流程的特定环节被必然调用。 | **主动选择**：智能体根据当前需要，主动从工具集中选择最合适的工具使用。这是 **“工具使用”模式**的核心。 |
+| **错误处理** | 通常较弱，需要开发者预先设计好错误处理分支。 | 通过 **“反思”模式** 内建了自我检查和修正的能力。智能体可以发现自己输出中的问题，并主动重试或调整策略。 |
+| **类比** | **食谱**：你必须严格按照步骤来，先放A，再放B，最后搅拌。 | **聘请厨师**：你告诉他“做一顿美味的大餐”，他会自己决定做什么菜、用什么食材、先做什么后做什么，并随时尝味调整。 |
+
+### 一个具体例子：**“查询今天的天气，并根据天气推荐一首歌”**
+
+*   **Chain 模式：**
+    1.  第一步：**固定**调用天气API工具，获取天气数据。
+    2.  第二步：将天气数据填入一个固定的提示模板，如“天气是{X}，请推荐一首歌”，发送给LLM。
+    3.  输出结果。
+    *   **问题**：如果天气API失败，整个链就中断了。它不会尝试换一个API或者给出降级方案。
+
+*   **Agentic Workflow 模式：**
+    1.  **目标**：“根据当前天气推荐一首合适的歌”。
+    2.  **规划**：智能体思考：“要完成这个，我需要先知道天气，然后根据天气信息选歌。”
+    3.  **行动**：尝试调用**天气API工具A**。
+    4.  **观察**：API调用失败。
+    5.  **反思与再规划**：“工具A失败了，我可以用备用工具B，或者询问用户所在城市手动搜索。”
+    6.  **行动**：尝试调用**备用天气API工具B**，成功获得天气数据。
+    7.  **行动**：根据“雨天”这个结果，调用**音乐知识库工具**或直接推理，选择一首歌。
+    8.  **反思**：“我推荐了《Rainy Days》。这个推荐符合忧郁的氛围吗？让我再确认一下。” 可能进行微调。
+    9.  **最终输出**：推荐结果及简要理由。
+
+### 总结与关系
+
+*   **Chain 是 Agentic Workflow 的基础组件**：在一个复杂的工作流中，某些步骤本身可能就是一个简单、固定的链。例如，一个负责“数据清洗”的智能体，其内部可能就是一个标准的文本处理链。
+*   **演进关系**：Chain 模式是构建AI应用的**第一代范式**，解决了基础的任务编排问题。Agentic Workflow 是**下一代范式**，旨在解决更复杂、更动态的挑战，其核心是**将决策权赋予AI本身**。
+*   **适用场景**：
+    *   用 **Chain**：当你的任务**流程清晰、稳定、可预测**时。它简单、可靠、易于调试。
+    *   用 **Agentic Workflow**：当你的任务**复杂、开放、需要应对未知情况或需要高质量、可靠输出**时。它更强大、更灵活，但设计和调试也更复杂。
+
+Andrew Ng 倡导 Agentic Workflow，正是因为他认为这是当前释放大语言模型在**复杂现实任务**中巨大潜力的最关键路径，超越了早期简单的链式调用模式。
+
+--- 消息 [7] role=user ---
+你好，在 LangGraph 里怎么实现这种 Workflow？
+
+--- 消息 [8] role=assistant ---
+这个分支先保留骨架，后续接工作流执行器。
+
+--- 消息 [9] role=user ---
+你好，能不能给一个 Python 代码示例？
+
+--- context_window 其余字段（JSON）---
+{
+  "approx_input_tokens": 2129,
+  "user_truncated": false,
+  "current_retrieval_truncated": false,
+  "current_tool_output_truncated": false,
+  "system_truncated": false,
+  "history_summary_used": false,
+  "old_messages_removed": 0,
+  "recent_messages_removed": 0
+}
+
+============================================================================
+UTC 时间: 2026-04-19T09:53:13+00:00
+Session ID（本文件仅含此会话）: 5d330ac5-94be-48be-97a5-b19a7990fb67
+Trace ID: 0633884a-f9f2-43fc-bf5b-c3a79813bc0c
+轮次: 第 6 轮
+意图: CHAT
+用户输入（本轮 query）:
+你好，如果我需要在这个代码里加上持久化存储呢？
+助手回复（节选）:
+很好！持久化是生产级 Agentic Workflow 的关键。在 LangGraph 中，主要有两种持久化方式：**检查点（Checkpointing）** 和 **外部存储集成**。我将展示如何为上面的代码添加这两种能力。
+
+## 方案一：使用 LangGraph 内置检查点（推荐）
+
+这是最简单的方式，可以自动保存和恢复工作流状态。
+
+```python
+import os
+from typing import TypedDict, List, Annotated
+from langgraph.graph import StateGraph, END
+from langgraph.graph.message import add_messages
+from langgraph.checkpoint import MemorySaver  # 内存存储
+from langgraph.checkpoint.sqlite import SqliteSaver  # SQLite 存储
+from langchain_openai import ChatOpenAI
+from langch…
+============================================================================
+【上下文窗口 — 与本轮 LLM 调用 assemble 结果一致】
+
+--- 消息 [0] role=system ---
+你是一个自然、简洁、可靠的聊天助手。
+
+--- 消息 [1] role=user ---
+你好，什么是 Agentic Workflow？
+
+--- 消息 [2] role=assistant ---
+这个分支先保留骨架，后续接工作流执行器。
+
+--- 消息 [3] role=user ---
+你好，Andrew Ng（吴恩达）对它有哪些定义？
+
+--- 消息 [4] role=assistant ---
+Andrew Ng（吴恩达）并没有对“Agentic Workflow”给出一个唯一的、标准的定义，但他通过演讲、课程和文章，清晰地描绘了这一概念的核心思想和发展方向。他的观点可以总结为以下几个关键点：
+
+### 1. **从“单次提示”到“多步工作流”的演进**
+吴恩达认为，当前大多数人对AI的使用还停留在“单次提示”的层面，即用户输入一个问题，AI一次性给出答案。而 **Agentic Workflow（智能体工作流）** 是指让AI智能体（Agent）通过**多步骤、有规划、能使用工具**的方式来完成一个复杂的任务。这更接近人类解决问题的方式：分解任务、逐步执行、根据反馈调整。
+
+### 2. **四大核心设计模式**
+在2024年的演讲和《AI Agentic Workflow Design Patterns》一文中，他重点阐述了构建有效智能体工作流的四种关键模式：
+
+*   **反思（Reflection）：** 智能体不会盲目接受自己第一次的输出。它会**自我审查、批判自己的结果**，检查是否存在错误、不一致或可以改进的地方，然后进行修正。这是提升输出质量的关键。
+*   **工具使用（Tool Use）：** 智能体不仅仅是生成文本，它应该能够**调用外部工具和API**，例如执行计算、搜索网络、查询数据库、编写代码等，从而扩展其能力边界。
+*   **规划（Planning）：** 智能体在开始任务前或执行过程中，会**制定并动态调整一个计划或任务列表**。例如，写一篇博客可能需要先列大纲、再研究、然后起草、最后编辑。
+*   **多智能体协作（Multi-agent collaboration）：** 一个复杂任务可以由**多个专门的智能体**共同完成。它们各司其职（如一个负责研究，一个负责写作，一个负责检查），通过相互讨论、辩论和协作来产生更优的结果。
+
+### 3. **核心价值：大幅提升复杂任务的表现**
+吴恩达强调，采用这些工作流模式，能**显著提升大语言模型在复杂、开放式任务上的性能**。他通过实验表明，一个具备反思能力的写作智能体，其输出质量远高于单次提示。他认为，这代表了当前让大语言模型发挥更大价值的最有前景的方向之一。
+
+### 4. **对开发者和企业的启示**
+他鼓励开发者和企业：
+*   **超越聊天界面**，去设计能够自主或半自主执行多步任务的AI应用。
+*   **将AI视为一个可以指挥的“工作者”**，而不仅仅是一个问答机。
+*   投资于构建**可靠、安全、可评估**的智能体系统。
+
+**总结来说，在吴恩达的语境下，Agentic Workflow 的核心定义是：** **一套让AI智能体通过规划、工具使用、反思及多智能体协作等模式，以多步骤、自主或半自主的方式可靠完成复杂任务的设计框架和方法论。** 这被认为是解锁大语言模型更高层次能力和实用价值的关键路径。
+
+--- 消息 [5] role=user ---
+你好，这种模式和传统的 Chain 模式有什么区别？
+
+--- 消息 [6] role=assistant ---
+这是一个非常核心且重要的问题。Andrew Ng 提出的 **Agentic Workflow** 与传统的 **Chain** 模式（以 LangChain 等框架为代表）在理念和实现上有本质区别，可以看作是 AI 应用架构的演进。
+
+简单来说：**Chain 是预定义的、线性的“流水线”；而 Agentic Workflow 是动态的、具备决策能力的“工作流”。**
+
+下面我们从几个维度进行详细对比：
+
+| 维度 | 传统 Chain 模式 | Agentic Workflow |
+| :--- | :--- | :--- |
+| **核心思想** | **确定性流程**：将任务分解为一系列固定的、预先编排好的步骤（链）。像工厂的装配线。 | **动态决策**：赋予智能体（Agent）自主权，使其能根据目标、上下文和中间结果，动态决定下一步做什么。像一位有经验的经理。 |
+| **控制流** | **线性或有限分支**：执行路径在运行前就已确定。通常是 `A -> B -> C`，可能有一些简单的 `if-else` 条件分支。 | **循环与递归**：核心是 **“感知-思考-行动”循环**。智能体持续评估现状，决定是调用工具、进行反思、继续执行还是结束任务。路径是运行时生成的。 |
+| **核心驱动力** | **数据流**：关注的是如何将上一个步骤的输出，作为下一个步骤的输入有效地传递下去。 | **目标与推理**：关注的是如何让智能体理解目标、制定计划（Planning）并进行批判性思考（Reflection）以达成目标。 |
+| **灵活性** | **较低**：擅长处理结构清晰、流程固定的任务（如：总结文档 -> 提取实体 -> 查询数据库 -> 生成报告）。如果任务偏离预设流程，容易失败。 | **很高**：擅长处理开放性强、需要探索和调整的复杂任务（如：“研究这个主题并写一份全面的市场分析报告”）。能处理意外和不确定性。 |
+| **典型组件** | 提示模板、LLM、工具（按固定顺序调用）、输出解析器。 | **智能体（具备决策能力的LLM）**、工具集、**规划器**、**反思器**、**多智能体协作**框架。 |
+| **与工具的关系** | **被动调用**：工具是链中的一个固定节点，在流程的特定环节被必然调用。 | **主动选择**：智能体根据当前需要，主动从工具集中选择最合适的工具使用。这是 **“工具使用”模式**的核心。 |
+| **错误处理** | 通常较弱，需要开发者预先设计好错误处理分支。 | 通过 **“反思”模式** 内建了自我检查和修正的能力。智能体可以发现自己输出中的问题，并主动重试或调整策略。 |
+| **类比** | **食谱**：你必须严格按照步骤来，先放A，再放B，最后搅拌。 | **聘请厨师**：你告诉他“做一顿美味的大餐”，他会自己决定做什么菜、用什么食材、先做什么后做什么，并随时尝味调整。 |
+
+### 一个具体例子：**“查询今天的天气，并根据天气推荐一首歌”**
+
+*   **Chain 模式：**
+    1.  第一步：**固定**调用天气API工具，获取天气数据。
+    2.  第二步：将天气数据填入一个固定的提示模板，如“天气是{X}，请推荐一首歌”，发送给LLM。
+    3.  输出结果。
+    *   **问题**：如果天气API失败，整个链就中断了。它不会尝试换一个API或者给出降级方案。
+
+*   **Agentic Workflow 模式：**
+    1.  **目标**：“根据当前天气推荐一首合适的歌”。
+    2.  **规划**：智能体思考：“要完成这个，我需要先知道天气，然后根据天气信息选歌。”
+    3.  **行动**：尝试调用**天气API工具A**。
+    4.  **观察**：API调用失败。
+    5.  **反思与再规划**：“工具A失败了，我可以用备用工具B，或者询问用户所在城市手动搜索。”
+    6.  **行动**：尝试调用**备用天气API工具B**，成功获得天气数据。
+    7.  **行动**：根据“雨天”这个结果，调用**音乐知识库工具**或直接推理，选择一首歌。
+    8.  **反思**：“我推荐了《Rainy Days》。这个推荐符合忧郁的氛围吗？让我再确认一下。” 可能进行微调。
+    9.  **最终输出**：推荐结果及简要理由。
+
+### 总结与关系
+
+*   **Chain 是 Agentic Workflow 的基础组件**：在一个复杂的工作流中，某些步骤本身可能就是一个简单、固定的链。例如，一个负责“数据清洗”的智能体，其内部可能就是一个标准的文本处理链。
+*   **演进关系**：Chain 模式是构建AI应用的**第一代范式**，解决了基础的任务编排问题。Agentic Workflow 是**下一代范式**，旨在解决更复杂、更动态的挑战，其核心是**将决策权赋予AI本身**。
+*   **适用场景**：
+    *   用 **Chain**：当你的任务**流程清晰、稳定、可预测**时。它简单、可靠、易于调试。
+    *   用 **Agentic Workflow**：当你的任务**复杂、开放、需要应对未知情况或需要高质量、可靠输出**时。它更强大、更灵活，但设计和调试也更复杂。
+
+Andrew Ng 倡导 Agentic Workflow，正是因为他认为这是当前释放大语言模型在**复杂现实任务**中巨大潜力的最关键路径，超越了早期简单的链式调用模式。
+
+--- 消息 [7] role=user ---
+你好，在 LangGraph 里怎么实现这种 Workflow？
+
+--- 消息 [8] role=assistant ---
+这个分支先保留骨架，后续接工作流执行器。
+
+--- 消息 [9] role=user ---
+你好，能不能给一个 Python 代码示例？
+
+--- 消息 [10] role=assistant ---
+当然可以。我将用一个经典的 **“研究并撰写报告”** 任务来展示如何在 LangGraph 中实现一个具备 **反思（Reflection）** 和 **规划（Planning）** 能力的 Agentic Workflow。
+
+这个示例将创建一个智能体，它能够：
+1. **规划**：分解研究任务
+2. **执行**：使用工具搜索信息
+3. **反思**：评估收集到的信息是否足够
+4. **协作**：多个角色（研究员、写作者）协作
+
+### 环境准备
+
+首先安装必要的库：
+
+```bash
+pip install langgraph langchain-openai tavily-python
+```
+
+### 完整代码示例
+
+```python
+import os
+from typing import TypedDict, List, Annotated
+from langgraph.graph import StateGraph, END
+from langgraph.graph.message import add_messages
+from langchain_openai import ChatOpenAI
+from langchain_community.tools.tavily_search import TavilySearchResults
+from langchain_core.messages import HumanMessage, SystemMessage
+
+# 设置API密钥（请替换为你的密钥）
+os.environ["OPENAI_API_KEY"] = "your-openai-api-key"
+os.environ["TAVILY_API_KEY"] = "your-tavily-api-key"
+
+# ========== 1. 定义状态结构 ==========
+class AgentState(TypedDict):
+    """工作流的状态容器"""
+    messages: Annotated[List, add_messages]  # 对话历史
+    topic: str  # 研究主题
+    research_notes: List[str]  # 研究笔记
+    outline: List[str]  # 报告大纲
+    draft: str  # 报告草稿
+    review_feedback: str  # 反思反馈
+    current_step: str  # 当前步骤
+
+# ========== 2. 初始化模型和工具 ==========
+llm = ChatOpenAI(model="gpt-4-turbo")
+search_tool = TavilySearchResults(max_results=3)
+
+# ========== 3. 定义各个节点（智能体）==========
+
+def planner_node(state: AgentState) -> AgentState:
+    """规划节点：分解任务，制定大纲"""
+    print(f"\n🔍 [规划器] 正在为主题 '{state['topic']}' 制定研究计划...")
+    
+    prompt = f"""
+    你是一个资深研究规划师。请为以下主题制定详细的研究计划：
+    主题：{state['topic']}
+    
+    请提供：
+    1. 需要研究的3-5个关键子主题
+    2. 每个子主题需要搜索的具体问题
+    3. 报告的建议结构大纲
+    
+    以JSON格式返回：
+    {{
+        "subtopics": ["子主题1", "子主题2", ...],
+        "search_queries": ["查询1", "查询2", ...],
+        "outline": ["章节1", "章节2", ...]
+    }}
+    """
+    
+    response = llm.invoke([HumanMessage(content=prompt)])
+    import json
+    try:
+        plan = json.loads(response.content)
+        state["outline"] = plan["outline"]
+        state["research_notes"] = []
+        
+        # 将搜索查询添加到消息中，供后续节点使用
+        state["messages"].append(HumanMessage(
+            content=f"研究计划已制定。需要搜索的关键词：{', '.join(plan['search_queries'])}"
+        ))
+    except:
+        state["outline"] = ["引言", "主体", "结论"]
+    
+    state["current_step"] = "research"
+    return state
+
+def research_node(state: AgentState) -> AgentState:
+    """研究节点：使用工具搜索信息"""
+    print(f"\n🔎 [研究员] 正在搜索关于 '{state['topic']}' 的信息...")
+    
+    # 从消息中提取搜索查询（简化处理）
+    last_msg = state["messages"][-1].content if state["messages"] else ""
+    search_query = state["topic"]
+    
+    if "需要搜索的关键词" in last_msg:
+        # 提取查询词
+        import re
+        queries = re.findall(r"需要搜索的关键词：(.*)", last_msg)
+        if queries:
+            search_query = queries[0].split(", ")[0]  # 取第一个查询
+    
+    # 执行搜索
+    try:
+        search_results = search_tool.invoke(search_query)
+        notes = []
+        for i, result in enumerate(search_results[:2]):  # 取前2个结果
+            note = f"来源{i+1}: {result.get('title', '无标题')}\n内容: {result.get('content', '无内容')[:200]}..."
+            notes.append(note)
+            print(f"  找到: {result.get('title', '无标题')[:50]}...")
+        
+        state["research_notes"].extend(notes)
+        state["messages"].append(HumanMessage(
+            content=f"搜索完成。找到 {len(notes)} 条相关信息。"
+        ))
+    except Exception as e:
+        print(f"搜索失败: {e}")
+        state["messages"].append(HumanMessage(
+            content="搜索工具暂时不可用，将基于现有知识继续。"
+        ))
+    
+    state["current_step"] = "write"
+    return state
+
+def writer_node(state: AgentState) -> AgentState:
+    """写作节点：基于研究笔记撰写草稿"""
+    print(f"\n✍️ [写作者] 正在撰写关于 '{state['topic']}' 的报告...")
+    
+    research_text = "\n".join(state["research_notes"])[:1000]  # 限制长度
+    outline_text = "\n".join(state["outline"])
+    
+    prompt = f"""
+    你是一位专业的技术作家。请基于以下研究笔记和大纲，撰写一份详细的报告。
+    
+    主题：{state['topic']}
+    
+    研究笔记：
+    {research_text}
+    
+    报告大纲：
+    {outline_text}
+    
+    请撰写一份结构完整、内容详实的报告，包含引言、主体和结论。
+    确保引用研究笔记中的具体信息。
+    """
+    
+    response = llm.invoke([HumanMessage(content=prompt)])
+    state["draft"] = response.content
+    
+    print(f"  草稿完成，长度: {len(state['draft'])} 字符")
+    state["current_step"] = "review"
+    return state
+
+def reviewer_node(state: AgentState) -> AgentState:
+    """反思节点：审查草稿质量"""
+    print(f"\n📝 [审查员] 正在审查报告质量...")
+    
+    prompt = f"""
+    你是一位严格的编辑。请审查以下报告草稿，并提供具体的改进反馈。
+    
+    报告主题：{state['topic']}
+    
+    草稿：
+    {state['draft'][:1500]}  # 限制长度
+    
+    请从以下角度提供反馈：
+    1. 内容完整性和准确性
+    2. 结构逻辑性
+    3. 语言表达清晰度
+    4. 需要补充或删减的部分
+    
+    如果草稿质量已经很好（得分8/10以上），请说"通过"。
+    否则，提供具体的修改建议。
+    """
+    
+    response = llm.invoke([HumanMessage(content=prompt)])
+    feedback = response.content
+    
+    state["review_feedback"] = feedback
+    
+    if "通过" in feedback or "8/10" in feedback or "9/10" in feedback or "10/10" in feedback:
+        print("  ✅ 审查通过！")
+        state["current_step"] = "end"
+    else:
+        print(f"  🔄 需要修改: {feedback[:100]}...")
+        state["current_step"] = "revise"
+    
+    return state
+
+def reviser_node(state: AgentState) -> AgentState:
+    """修订节点：根据反馈修改草稿"""
+    print(f"\n🔄 [修订者] 正在根据反馈修改报告...")
+    
+    prompt = f"""
+    请根据编辑的反馈修改报告草稿。
+    
+    原始草稿：
+    {state['draft'][:1000]}
+    
+    编辑反馈：
+    {state['review_feedback']}
+    
+    请提供修改后的完整报告。
+    """
+    
+    response = llm.invoke([HumanMessage(content=prompt)])
+    state["draft"] = response.content
+    print(f"  修订完成，新长度: {len(state['draft'])} 字符")
+    
+    state["current_step"] = "review"  # 返回审查节点进行再次检查
+    return state
+
+# ========== 4. 构建工作流图 ==========
+def route_after_review(state: AgentState) -> str:
+    """路由函数：根据审查结果决定下一步"""
+    if state["current_step"] == "end":
+        return "end"
+    elif state["current_step"] == "revise":
+        return "reviser"
+    else:
+        return "reviewer"  # 理论上不会到这里
+
+# 创建图
+workflow = StateGraph(AgentState)
+
+# 添加节点
+workflow.add_node("planner", planner_node)
+workflow.add_node("researcher", research_node)
+workflow.add_node("writer", writer_node)
+workflow.add_node("reviewer", reviewer_node)
+workflow.add_node("reviser", reviser_node)
+
+# 设置边（流程）
+workflow.set_entry_point("planner")
+workflow.add_edge("planner", "researcher")
+workflow.add_edge("
+
+--- 消息 [11] role=user ---
+你好，如果我需要在这个代码里加上持久化存储呢？
+
+--- context_window 其余字段（JSON）---
+{
+  "approx_input_tokens": 5557,
+  "user_truncated": false,
+  "current_retrieval_truncated": false,
+  "current_tool_output_truncated": false,
+  "system_truncated": false,
+  "history_summary_used": false,
+  "old_messages_removed": 0,
+  "recent_messages_removed": 0
+}

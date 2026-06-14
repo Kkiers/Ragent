@@ -1,0 +1,8 @@
+{
+  "query": "语音通话支持录音吗？哪些场景支持，哪些不支持？",
+  "history": [],
+  "top_k": 3,
+  "stream": false,
+  "debug": true,
+  "enable_heavy_rewrite": true
+}

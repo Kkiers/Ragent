@@ -1,0 +1,34 @@
+# Service.Hyperlink.open
+
+# Service.Hyperlink.open
+传入url，打开对应链接，该方法为异步调用。
+
+## 可用性说明
+
+权限要求 | 视图可用说明 | 平台可用 | 场景
+--- | --- | --- | ---
+可读 | 所有视图 | - PC  
+- 移动端 | 演示模式
+
+## 输入
+
+| **名称** | **数据类型** | **是否必填** | **描述** |
+| ------ | -------- | -------- | ------ |
+| url    | string   | 是        | 链接     |
+
+## 输出
+
+无
+
+## 示例代码
+
+### 调用示例
+
+```js
+const DocMiniApp = new BlockitClient().initAPI();
+DocMiniApp.Service.Hyperlink.open('baidu.com');
+```
+
+### 返回示例
+
+无
